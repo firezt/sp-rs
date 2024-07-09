@@ -1,9 +1,7 @@
 name: CD
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -49,7 +47,7 @@ jobs:
         with:
           use-cross: ${{ matrix.cross_arch }}
           command: build
-          args: --locked --release --target ${{ matrix.target }}
+          args: --features lyric-finder,image,notify,fzf --locked --release --target ${{ matrix.target }}
 
       - name: Package
         shell: bash
